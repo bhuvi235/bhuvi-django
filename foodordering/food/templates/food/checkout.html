@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+
+    <h1>Checkout 🧾</h1>
+
+    <h2>Order Summary</h2>
+    <ul>
+        {% for food_id, quantity in cart.items %}
+            <li>Food ID {{ food_id }} — Qty: {{ quantity }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="customer_name">Name:</label><br>
+        <input type="text" id="customer_name" name="customer_name" required><br><br>
+
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <label for="address">Delivery Address:</label><br>
+        <textarea id="address" name="address" required></textarea><br><br>
+
+        <button type="submit">Confirm Order ✅</button>
+    </form>
+
+    <a href="{% url 'cart' %}">Back to Cart</a>
+
+</body>
+</html>

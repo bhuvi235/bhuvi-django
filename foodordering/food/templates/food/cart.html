@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+</head>
+<body>
+
+    <h1>Your Cart 🛒</h1>
+
+    {% if cart_items %}
+        {% for item in cart_items %}
+
+            <div>
+                <h2>{{ item.food.name }}</h2>
+
+                {% if item.food.image %}
+                    <img src="{{ item.food.image.url }}"
+                         alt="{{ item.food.name }}"
+                         width="150">
+                {% endif %}
+
+                <p>Price: Rs. {{ item.food.price }}</p>
+                <div>
+                    <a href="{% url 'decrease_cart' item.food.id %}">➖</a>
+
+                        <span> {{ item.quantity }} </span>
+
+                    <a href="{% url 'increase_cart' item.food.id %}">➕</a>
+                    <br>
+                    <a href="{% url 'remove_from_cart' item.food.id %}">
+                        <button>Remove from Cart</button>
+                    </a>
+                </div>
+                <p>Total: Rs. {{ item.subtotal }}</p>
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+        <h2>Grand Total: Rs. {{ total }}</h2>
+        <a href="{% url 'place_order' %}">
+            <button>Place Order🧾</button>
+        </a>
+
+    {% else %}
+        <h2>Your cart is empty 🛒</h2>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Continue Shopping</a>
+
+</body>
+</html>

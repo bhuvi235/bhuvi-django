@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering System</title>
+    <style>
+        body {
+            margin:0
+            font-family Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+        nav {
+            background-color: #222;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h2 {
+            color: white;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 20px;
+        }
+        .menu {
+            padding: 40px;
+            text-align: center;
+        }
+        .menu h2 {
+            font-size: 32px;
+        }
+        .foods {
+            display:flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+            width: 230px;
+        }
+        .card h3 {
+            font-size: 24px;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        button{
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .register-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            border: 2px solid #ff5722;
+            border-radius: 8px;
+            background: white;
+           color: #ff5722;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+}
+
+.register-btn:hover {
+    background: #ff5722;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <h2>Food Ordering System</h2>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'menu' %}">Menu</a>
+            <a href="{% url 'cart' %}">Cart</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    </nav>
+    <section class="hero">
+        <h1>Welcome to Our Food Ordering System</h1>
+        <p>Order your favorite meals online and get them delivered to your doorstep!</p>
+        <button>Order Now</button>
+    </section>
+    <section class="menu">
+        <h2>Our Popular Foods</h2>
+        <div class="foods">
+            {% for food in foods %}
+                <div class="card">
+                    <h3>{{ food.name }}</h3>
+                    {% if food.image %}
+                        <img src="{{ food.image.url }}" alt="{{ food.name }}" width="200">
+                    {% endif %}
+                    <p>{{ food.description }}</p>
+                    <p class="price">Rs.{{ food.price }} </p>
+                    <a href="{% url 'add_to_cart' food.id %}">
+                        <button>Add to Cart</button>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2026 Food Ordering System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

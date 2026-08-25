@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+
+<body>
+
+    <h1>Menu</h1>
+
+    {% for item in foods %}
+
+        <div>
+
+            <h2>{{ item.name }}</h2>
+
+            {% if item.image %}
+                <img src="{{ item.image.url }}" width="150">
+            {% endif %}
+
+            <p>{{ item.description }}</p>
+
+            <p>Price: Rs. {{ item.price }}</p>
+
+            <a href="{% url 'add_to_cart' item.id %}">
+                <button>Add to Cart 🛒</button>
+            </a>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+</body>
+</html>
